@@ -1,0 +1,25 @@
+{
+  "poll": {
+    "register_form": {
+      "title": "نظر سنجی",
+      "question": "سوال نظر سنجی",
+      "options": "گزینه های نظر سنجی",
+      "option": "گزینه ",
+      "type": "نوع نظر سنجی",
+      "private": "خصوصی",
+      "public": "عمومی",
+      "password": "رمز عبور نظرسنجی"
+    },
+    "config_form": {
+      "title": "نظر ",
+      "question": "سوال نظر سنجی",
+      "options": "گزینه های نظر سنجی",
+      "type": "نوع نظر سنجی",
+      "private": "",
+      "public": "",
+      "password": ""
+    },
+    "TITLE": "Hello Angular with ngx-translate!",
+    "SELECT": "Change language"
+  }
+}

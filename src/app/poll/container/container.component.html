@@ -1,0 +1,54 @@
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <div class="example-container">
+      <mat-form-field>
+        <textarea matInput placeholder="{{'poll.register_form.question' | translate }}"></textarea>
+      </mat-form-field>
+      <br/>
+      <br/>
+      <mat-label>{{'poll.register_form.options' | translate }}</mat-label>
+      <br/>
+      <div id="options">
+        <mat-form-field>
+          <input name="" matInput placeholder="{{'poll.register_form.option' | translate }}">
+        </mat-form-field>
+      </div>
+
+      <br/>
+      <br/>
+      <br/>
+
+      <button mat-button class="blue" (click)="addAnswerOption()">+</button>
+    </div>
+
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field>
+        <mat-select placeholder="{{'poll.register_form.type' | translate }}">
+          <mat-option value="private">{{'poll.register_form.private' | translate }}</mat-option>
+          <mat-option value="public">{{'poll.register_form.public' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
