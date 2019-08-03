@@ -10,25 +10,34 @@ import {TranslateService} from '@ngx-translate/core';
 export class ContainerComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  answerOptions: number;
+  reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private translate: TranslateService) {
+  constructor(private formBuilder: FormBuilder, private translate: TranslateService, private fb: FormBuilder) {
     translate.use('fa');
   }
 
   ngOnInit() {
-    this.answerOptions[0] = 1;
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+
+    this.createForm();
+
   }
 
-  addAnswerOption() {
+  onSubmit() {
+    console.log('reactiveForm', this.reactiveForm.value);
+  }
 
-    console.log('itemAdding');
+  createForm() {
+    this.reactiveForm = this.fb.group({
+      question: ['', Validators.required],
+      type: ['', [Validators.required, Validators.email]],
+      options: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 }
 

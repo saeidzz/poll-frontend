@@ -2,6 +2,10 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 *{
   direction: rtl;
+  align-items: right;
+  align-content: right;
+  alignment: right;
+  text-align: right;
 }
 
 .blue{

@@ -1,8 +1,48 @@
 <mat-horizontal-stepper labelPosition="bottom" #stepper>
   <mat-step [stepControl]="firstFormGroup">
+    <h1 style="text-align:center">
+      Angular Login Example
+    </h1>
+    <div class="poll info">
+      <section class="section">
+        <div class="columns is-centered">
+          <div class="column is-one-third">
+            <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label class="label">{{'poll.register_form.question'|translate}}</label>
+                <input class="input"
+                       type="text"
+                       formControlName="question">
+              </div>
+
+              <div class="field">
+                <label class="label">Email</label>
+                <input class="input"
+                       type="text"
+                       formControlName="email">
+              </div>
+
+              <div class="field">
+                <label class="label">Password</label>
+                <input class="input"
+                       type="password"
+                       formControlName="password">
+              </div>
+
+              <button type="submit"  class="button is-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <!--<form [formGroup]="firstFormGroup">
     <div class="example-container">
+      <mat-label>{{'poll.register_form.question' | translate }}</mat-label>
+      <br/>
       <mat-form-field>
-        <textarea matInput placeholder="{{'poll.register_form.question' | translate }}"></textarea>
+        <textarea matInput></textarea>
       </mat-form-field>
       <br/>
       <br/>
@@ -20,7 +60,7 @@
 
       <button mat-button class="blue" (click)="addAnswerOption()">+</button>
     </div>
-
+    </form>-->
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup">
