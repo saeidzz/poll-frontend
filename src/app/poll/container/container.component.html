@@ -1,66 +1,58 @@
 <mat-horizontal-stepper labelPosition="bottom" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <h1 style="text-align:center">
-      Angular Login Example
+      {{'poll.register_form.title'|translate}}
     </h1>
     <div class="poll info">
       <section class="section">
         <div class="columns is-centered">
           <div class="column is-one-third">
             <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
+              <div class="form-group col-sm-3">
                 <label class="label">{{'poll.register_form.question'|translate}}</label>
-                <input class="input"
+                <textarea class="form-control"
                        type="text"
-                       formControlName="question">
+                          formControlName="question"></textarea>
               </div>
 
-              <div class="field">
-                <label class="label">Email</label>
-                <input class="input"
+              <div class="form-group col-sm-3">
+                <label class="label">{{'poll.register_form.type'|translate}}</label>
+                <select class="form-control"
+                        formControlName="type">
+                  <option value="private">{{'poll.register_form.private'|translate}}</option>
+                  <option value="public">{{'poll.register_form.public'|translate}}</option>
+
+                </select>
+              </div>
+
+              <label class="label">{{'poll.register_form.options'|translate}} </label>
+              <div class="form-group col-sm-3">
+                <input class="form-control"
                        type="text"
-                       formControlName="email">
+                       placeholder="{{'poll.register_form.option'|translate}}"
+                       formControlName="defaultOption">
               </div>
-
-              <div class="field">
-                <label class="label">Password</label>
-                <input class="input"
-                       type="password"
-                       formControlName="password">
+              <div formArrayName="options" class="form-group col-sm-3"
+                   *ngFor="let option of options.controls;let i=index">
+                <div *ngIf="i<=10">
+                  <input class="form-control"
+                         type="text"
+                         placeholder="{{'poll.register_form.option'|translate}}"
+                         [formControlName]="i">
+                </div>
               </div>
-
-              <button type="submit"  class="button is-primary">Submit</button>
+              <br/>
+              <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
             </form>
           </div>
         </div>
       </section>
     </div>
 
-
-    <!--<form [formGroup]="firstFormGroup">
-    <div class="example-container">
-      <mat-label>{{'poll.register_form.question' | translate }}</mat-label>
-      <br/>
-      <mat-form-field>
-        <textarea matInput></textarea>
-      </mat-form-field>
-      <br/>
-      <br/>
-      <mat-label>{{'poll.register_form.options' | translate }}</mat-label>
-      <br/>
-      <div id="options">
-        <mat-form-field>
-          <input name="" matInput placeholder="{{'poll.register_form.option' | translate }}">
-        </mat-form-field>
-      </div>
-
-      <br/>
-      <br/>
-      <br/>
-
-      <button mat-button class="blue" (click)="addAnswerOption()">+</button>
+    <div>
+      <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+      <button mat-button matStepperNext>{{'poll.next' | translate }}</button>
     </div>
-    </form>-->
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup">
@@ -77,8 +69,8 @@
         <input matInput placeholder="Address" formControlName="secondCtrl" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+        <button mat-button matStepperNext>{{'poll.next' | translate }}</button>
       </div>
     </form>
   </mat-step>

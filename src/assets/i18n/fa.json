@@ -19,7 +19,7 @@
       "public": "",
       "password": ""
     },
-    "TITLE": "Hello Angular with ngx-translate!",
-    "SELECT": "Change language"
+    "next": "مرحله بعد",
+    "previous": "مرحله قبل"
   }
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -12,15 +12,19 @@ export class ContainerComponent implements OnInit {
   secondFormGroup: FormGroup;
   reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private translate: TranslateService, private fb: FormBuilder) {
+  constructor(private translate: TranslateService, private fb: FormBuilder) {
     translate.use('fa');
   }
 
+  get options() {
+    return this.reactiveForm.get('options') as FormArray;
+  }
+
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
+    this.firstFormGroup = this.fb.group({
       firstCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this.formBuilder.group({
+    this.secondFormGroup = this.fb.group({
       secondCtrl: ['', Validators.required]
     });
 
@@ -32,11 +36,17 @@ export class ContainerComponent implements OnInit {
     console.log('reactiveForm', this.reactiveForm.value);
   }
 
+  addOption() {
+    this.options.push(new FormControl(''));
+  }
+
+
   createForm() {
     this.reactiveForm = this.fb.group({
       question: ['', Validators.required],
-      type: ['', [Validators.required, Validators.email]],
-      options: ['', [Validators.required, Validators.minLength(6)]]
+      defaultOption: ['', Validators.required],
+      type: ['', [Validators.required]],
+      options: this.fb.array([])
     });
   }
 }
