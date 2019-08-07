@@ -8,27 +8,34 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  reactiveForm: FormGroup;
+  configFormGroup: FormGroup;
+  themeFormGroup: FormGroup;
+  finalFormGroup: FormGroup;
+  pollFromGroup: FormGroup;
 
   constructor(private translate: TranslateService, private fb: FormBuilder) {
     translate.use('fa');
   }
 
   get options() {
-    return this.reactiveForm.get('options') as FormArray;
+    return this.pollFromGroup.get('options') as FormArray;
   }
 
   ngOnInit() {
-    this.firstFormGroup = this.fb.group({
-      firstCtrl: ['', Validators.required]
+    this.configFormGroup = this.fb.group({
+      type: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      securityLevel: ['', [Validators.required]],
+      timeLimited: ['', [Validators.required]],
+      expireDate: ['', [Validators.required]],
+      showResultToOther: ['', [Validators.required]],
+      otherOption: ['', [Validators.required]],
+      selectMultiple: ['', [Validators.required]]
     });
-    this.secondFormGroup = this.fb.group({
+    this.themeFormGroup = this.fb.group({
       secondCtrl: ['', Validators.required]
     });
-    this.thirdFormGroup = this.fb.group({
+    this.finalFormGroup = this.fb.group({
       secondCtrl: ['', Validators.required]
     });
 
@@ -37,7 +44,7 @@ export class ContainerComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('reactiveForm', this.reactiveForm.value);
+    console.log('pollFromGroup', this.pollFromGroup.value);
   }
 
   addOption() {
@@ -46,10 +53,9 @@ export class ContainerComponent implements OnInit {
 
 
   createForm() {
-    this.reactiveForm = this.fb.group({
+    this.pollFromGroup = this.fb.group({
       question: ['', Validators.required],
       defaultOption: ['', Validators.required],
-      type: ['', [Validators.required]],
       options: this.fb.array([])
     });
   }

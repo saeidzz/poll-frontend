@@ -8,7 +8,17 @@
       "type": "نوع نظر سنجی",
       "private": "خصوصی",
       "public": "عمومی",
-      "password": "رمز عبور نظرسنجی"
+      "password": "رمز عبور نظرسنجی",
+      "multipleVote": "رأی متعدد هر شرکت کننده",
+      "light": "سطح پایین",
+      "heavy": "سطح بالا",
+      "blockByIp": "با استفاده از آدرس آی پی (پیشنهاد نمی شود)",
+      "true": "بله",
+      "false": "خیر",
+      "expireDate": "تاریخ انقضاء",
+      "otherOption": "امکان اضافه شدن نظرات دلخواه",
+      "selectMultiple": "انتخاب گزینه متعدد",
+      "showResultToOther": "نمایش نتایج به شرکت کنندگان"
     },
     "config_form": {
       "title": "نظر ",

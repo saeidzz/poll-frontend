@@ -1,84 +1,137 @@
 <div class="container center shadow-lg">
   <div>
     <mat-horizontal-stepper labelPosition="bottom" #stepper>
-      <mat-step [stepControl]="firstFormGroup">
+      <mat-step [stepControl]="pollFromGroup">
         <h1 style="text-align:center">
           {{'poll.register_form.title'|translate}}
         </h1>
-          <div class="poll info">
-            <section class="section">
-              <div class="columns is-centered">
-                <div class="column is-one-third">
-                  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                      <label class="label">{{'poll.register_form.question'|translate}}</label>
-                      <textarea class="form-control"
-                                type="text"
-                                formControlName="question"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="label">{{'poll.register_form.type'|translate}}</label>
-                      <select class="form-control"
-                              formControlName="type">
-                        <option value="private">{{'poll.register_form.private'|translate}}</option>
-                        <option value="public">{{'poll.register_form.public'|translate}}</option>
-
-                      </select>
-                    </div>
-
-                    <label class="label">{{'poll.register_form.options'|translate}} </label>
-                    <div class="form-group ">
+        <div class="poll info">
+          <section class="section">
+            <div class="columns is-centered">
+              <div class="column is-one-third">
+                <form [formGroup]="pollFromGroup" (ngSubmit)="onSubmit()">
+                  <div class="form-group">
+                    <label class="label">{{'poll.register_form.question'|translate}}</label>
+                    <textarea class="form-control"
+                              type="text"
+                              formControlName="question"></textarea>
+                  </div>
+                  <label class="label">{{'poll.register_form.options'|translate}} </label>
+                  <div class="form-group ">
+                    <input class="form-control"
+                           type="text"
+                           placeholder="{{'poll.register_form.option'|translate}}"
+                           formControlName="defaultOption">
+                  </div>
+                  <div formArrayName="options" class="form-group "
+                       *ngFor="let option of options.controls;let i=index">
+                    <div *ngIf="i<=10">
                       <input class="form-control"
                              type="text"
                              placeholder="{{'poll.register_form.option'|translate}}"
-                             formControlName="defaultOption">
+                             [formControlName]="i">
                     </div>
-                    <div formArrayName="options" class="form-group "
-                         *ngFor="let option of options.controls;let i=index">
-                      <div *ngIf="i<=10">
-                        <input class="form-control"
-                               type="text"
-                               placeholder="{{'poll.register_form.option'|translate}}"
-                               [formControlName]="i">
-                      </div>
-                    </div>
-                    <br/>
-                    <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
-                  </form>
-                </div>
+                  </div>
+                  <br/>
+                  <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
+                  <div>
+                    <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+                    <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+                  </div>
+                </form>
               </div>
-            </section>
-          </div>
-
-        <div>
-          <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-          <button mat-button matStepperNext>{{'poll.next' | translate }}</button>
+            </div>
+          </section>
         </div>
       </mat-step>
 
-      <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-          <mat-form-field>
-            <mat-select placeholder="{{'poll.register_form.type' | translate }}">
-              <mat-option value="private">{{'poll.register_form.private' | translate }}</mat-option>
-              <mat-option value="public">{{'poll.register_form.public' | translate }}</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-step [stepControl]="configFormGroup">
+        <h1 style="text-align:center">
+          {{'poll.register_form.title'|translate}}
+        </h1>
+        <div class="poll info">
+          <section class="section">
+            <div class="columns is-centered">
+              <div class="column is-one-third">
+                <form [formGroup]="configFormGroup" (ngSubmit)="onSubmit()">
+                  <div class="form-group">
+                    <label class="label">{{'poll.register_form.type'|translate}}</label>
+                    <select class="form-control"
+                            formControlName="type">
+                      <option value="private">{{'poll.register_form.private'|translate}}</option>
+                      <option value="public">{{'poll.register_form.public'|translate}}</option>
+                    </select>
+                  </div>
+                  <!-- *ngif() -->
+                  <label class="label">{{'poll.register_form.password'|translate}} </label>
+                  <div class="form-group ">
+                    <input class="form-control"
+                           type="password"
+                           placeholder="{{'poll.register_form.password'|translate}}"
+                           formControlName="password">
+                  </div>
+                  <label class="label">{{'poll.register_form.securityLevel'|translate}} </label>
+                  <select class="form-control"
+                          formControlName="securityLevel">
+                    <option value="multipleVote">{{'poll.register_form.multipleVote'|translate}}</option>
+                    <option value="light">{{'poll.register_form.light'|translate}}</option>
+                    <option value="heavy">{{'poll.register_form.heavy'|translate}}</option>
+                    <option value="blockByIp">{{'poll.register_form.blockByIp'|translate}}</option>
+                  </select>
+                  <label class="label">{{'poll.register_form.timeLimited'|translate}} </label>
+                  <select class="form-control"
+                          formControlName="timeLimited">
+                    <option value="true">{{'poll.register_form.true'|translate}}</option>
+                    <option value="false">{{'poll.register_form.false'|translate}}</option>
 
-          <ng-template matStepLabel>Fill out your address</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-            <button mat-button matStepperNext>{{'poll.next' | translate }}</button>
-          </div>
-        </form>
+                  </select>
+                  <!-- *ngif() -->
+                  <label class="label">{{'poll.register_form.expireDate'|translate}} </label>
+                  <div class="form-group ">
+                    <input class="form-control"
+                           type="text"
+                           placeholder="{{'poll.register_form.expireDate'|translate}}"
+                           formControlName="expireDate">
+                  </div>
+                  <label class="label">{{'poll.register_form.showResultToOther'|translate}} </label>
+                  <div class="form-group ">
+                    <input class="form-control cb pristine"
+                           type="checkbox"
+
+                           placeholder="{{'poll.register_form.showResultToOther'|translate}}"
+                           formControlName="showResultToOther">
+                  </div>
+                  <label class="label">{{'poll.register_form.otherOption'|translate}} </label>
+                  <div class="form-group ">
+                    <input class="form-control cb pristine"
+                           type="checkbox"
+                           placeholder="{{'poll.register_form.otherOption'|translate}}"
+                           formControlName="otherOption">
+                  </div>
+                  <label class="label">{{'poll.register_form.selectMultiple'|translate}} </label>
+                  <div class="form-group ">
+                    <input class="form-control cb pristine"
+                           type="checkbox"
+                           placeholder="{{'poll.register_form.selectMultiple'|translate}}"
+                           formControlName="selectMultiple">
+                  </div>
+
+
+                  <div>
+                    <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+                    <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
       </mat-step>
 
-      <mat-step [stepControl]="thirdFormGroup">
-        <form [formGroup]="thirdFormGroup">
+      <mat-step [stepControl]="finalFormGroup">
+        <form [formGroup]="finalFormGroup">
           <mat-form-field>
             <mat-select placeholder="{{'poll.register_form.type' | translate }}">
               <mat-option value="private">{{'poll.register_form.private' | translate }}</mat-option>
