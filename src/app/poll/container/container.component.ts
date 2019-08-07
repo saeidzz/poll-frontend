@@ -10,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class ContainerComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
   reactiveForm: FormGroup;
 
   constructor(private translate: TranslateService, private fb: FormBuilder) {
@@ -25,6 +26,9 @@ export class ContainerComponent implements OnInit {
       firstCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this.fb.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.fb.group({
       secondCtrl: ['', Validators.required]
     });
 
