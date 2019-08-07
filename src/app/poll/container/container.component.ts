@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
+import {MatIconRegistry} from "@angular/material";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent implements OnInit {
   configFormGroup: FormGroup;
@@ -15,6 +17,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(private translate: TranslateService, private fb: FormBuilder) {
     translate.use('fa');
+
   }
 
   get options() {
@@ -59,6 +62,8 @@ export class ContainerComponent implements OnInit {
       options: this.fb.array([])
     });
   }
+
+
 }
 
 

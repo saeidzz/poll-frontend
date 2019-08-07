@@ -133,5 +133,10 @@
       }
     }
   },
-  "defaultProject": "poll"
+  "defaultProject": "poll",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

@@ -35,8 +35,8 @@
                   <br/>
                   <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
                   <div>
-                    <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-                    <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+                    <button  mat-button matStepperPrevious><i class="fa fa-home"></i></button>
+                    <button   mat-button matStepperNext type="submit"> <i class="fa fa-home"></i></button>
                   </div>
                 </form>
               </div>
@@ -93,29 +93,26 @@
                            placeholder="{{'poll.register_form.expireDate'|translate}}"
                            formControlName="expireDate">
                   </div>
-                  <label class="label">{{'poll.register_form.showResultToOther'|translate}} </label>
-                  <div class="form-group ">
-                    <input class="form-control cb pristine"
-                           type="checkbox"
-
-                           placeholder="{{'poll.register_form.showResultToOther'|translate}}"
-                           formControlName="showResultToOther">
-                  </div>
-                  <label class="label">{{'poll.register_form.otherOption'|translate}} </label>
-                  <div class="form-group ">
-                    <input class="form-control cb pristine"
-                           type="checkbox"
-                           placeholder="{{'poll.register_form.otherOption'|translate}}"
-                           formControlName="otherOption">
-                  </div>
-                  <label class="label">{{'poll.register_form.selectMultiple'|translate}} </label>
-                  <div class="form-group ">
-                    <input class="form-control cb pristine"
-                           type="checkbox"
-                           placeholder="{{'poll.register_form.selectMultiple'|translate}}"
-                           formControlName="selectMultiple">
+                  <div class="form-group">
+                    <label class="label-container">{{'poll.register_form.showResultToOther'|translate}}
+                      <input formControlName="showResultToOther" type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
                   </div>
 
+                  <div class="form-group">
+                    <label class="label-container">{{'poll.register_form.otherOption'|translate}}
+                      <input formControlName="otherOption" type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="label-container">{{'poll.register_form.selectMultiple'|translate}}
+                      <input formControlName="selectMultiple" type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
 
                   <div>
                     <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>

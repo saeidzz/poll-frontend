@@ -18,7 +18,9 @@
       "expireDate": "تاریخ انقضاء",
       "otherOption": "امکان اضافه شدن نظرات دلخواه",
       "selectMultiple": "انتخاب گزینه متعدد",
-      "showResultToOther": "نمایش نتایج به شرکت کنندگان"
+      "showResultToOther": "نمایش نتایج به شرکت کنندگان",
+      "securityLevel": "سطح امنیت ",
+      "timeLimited": "محدود زمانی"
     },
     "config_form": {
       "title": "نظر ",
