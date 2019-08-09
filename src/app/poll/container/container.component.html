@@ -17,26 +17,21 @@
                               formControlName="question"></textarea>
                   </div>
                   <label class="label">{{'poll.register_form.options'|translate}} </label>
-                  <div class="form-group ">
+                  <div formArrayName="options" class="form-group "
+                       *ngFor="let option of options.controls;let i=index">
                     <input class="form-control"
                            type="text"
                            placeholder="{{'poll.register_form.option'|translate}}"
-                           formControlName="defaultOption">
-                  </div>
-                  <div formArrayName="options" class="form-group "
-                       *ngFor="let option of options.controls;let i=index">
-                    <div *ngIf="i<=10">
-                      <input class="form-control"
-                             type="text"
-                             placeholder="{{'poll.register_form.option'|translate}}"
-                             [formControlName]="i">
-                    </div>
+                           [formControlName]="i">
                   </div>
                   <br/>
-                  <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
+                  <div *ngIf="options.length<=5">
+
+                    <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
+                  </div>
                   <div>
-                    <button  mat-button matStepperPrevious><i class="fa fa-home"></i></button>
-                    <button   mat-button matStepperNext type="submit"> <i class="fa fa-home"></i></button>
+                    <button mat-button matStepperPrevious>مرحله قبل</button>
+                    <button mat-button matStepperNext type="submit">مرحله بعد</button>
                   </div>
                 </form>
               </div>
@@ -62,7 +57,7 @@
                       <option value="public">{{'poll.register_form.public'|translate}}</option>
                     </select>
                   </div>
-                  <!-- *ngif() -->
+                  &lt;!&ndash; *ngif() &ndash;&gt;
                   <label class="label">{{'poll.register_form.password'|translate}} </label>
                   <div class="form-group ">
                     <input class="form-control"
@@ -85,7 +80,7 @@
                     <option value="false">{{'poll.register_form.false'|translate}}</option>
 
                   </select>
-                  <!-- *ngif() -->
+                  &lt;!&ndash; *ngif() &ndash;&gt;
                   <label class="label">{{'poll.register_form.expireDate'|translate}} </label>
                   <div class="form-group ">
                     <input class="form-control"
@@ -127,26 +122,45 @@
         </div>
       </mat-step>
 
-      <mat-step [stepControl]="finalFormGroup">
-        <form [formGroup]="finalFormGroup">
-          <mat-form-field>
-            <mat-select placeholder="{{'poll.register_form.type' | translate }}">
-              <mat-option value="private">{{'poll.register_form.private' | translate }}</mat-option>
-              <mat-option value="public">{{'poll.register_form.public' | translate }}</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-step [stepControl]="pollFromGroup">
+      <div class="btn-group">
+        <button class="btn btn-secondary">1</button>
+        <button class="btn btn-primary">2</button>
+        <button class="btn btn-danger">3</button>
+        <button class="btn btn-info">4</button>
+      </div>
+        <h1 style="text-align:center">
+          {{pollFromGroup.get('question').value}}
+        </h1>
+        <div class="poll info">
+          <section class="section">
+            <div class="columns is-centered">
+              <div class="column is-one-third">
+                <form [formGroup]="pollFromGroup" (ngSubmit)="onSubmit()">
+                  <div class="container paddinged">
+                    <div formArrayName="options" class="form-group "
+                         *ngFor="let option of options.controls;let i=index">
+                      <div class="form-group">
+                        <label class="label-container form-control">{{option.value}}
+                          <input type="checkbox" formControlName="i">
+                          <span class="checkmark hundred-percent"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
 
-          <ng-template matStepLabel>Fill out your address</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-            <button mat-button matStepperNext>{{'poll.next' | translate }}</button>
-          </div>
-        </form>
+                  <div>
+                    <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+                    <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
       </mat-step>
-
 
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
@@ -159,3 +173,4 @@
     </mat-horizontal-stepper>
   </div>
 </div>
+

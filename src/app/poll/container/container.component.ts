@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import {MatIconRegistry} from "@angular/material";
-import {DomSanitizer} from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-container',
@@ -43,7 +42,8 @@ export class ContainerComponent implements OnInit {
     });
 
     this.createForm();
-
+    this.options.push(new FormControl(''));
+    this.options.push(new FormControl(''));
   }
 
   onSubmit() {
@@ -58,7 +58,6 @@ export class ContainerComponent implements OnInit {
   createForm() {
     this.pollFromGroup = this.fb.group({
       question: ['', Validators.required],
-      defaultOption: ['', Validators.required],
       options: this.fb.array([])
     });
   }
