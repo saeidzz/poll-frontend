@@ -62,6 +62,10 @@ export class ContainerComponent implements OnInit {
     });
   }
 
+  printText(s: any) {
+    console.log(s);
+  }
+
 
 }
 

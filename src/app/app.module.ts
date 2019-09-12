@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {ColorPickerModule} from 'ngx-color-picker';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -41,6 +42,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatOptionModule,
     MatSelectModule,
     MatButtonModule,
+    ColorPickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

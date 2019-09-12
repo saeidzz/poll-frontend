@@ -123,43 +123,235 @@
       </mat-step>
 
       <mat-step [stepControl]="pollFromGroup">
-      <div class="btn-group">
-        <button class="btn btn-secondary">1</button>
-        <button class="btn btn-primary">2</button>
-        <button class="btn btn-danger">3</button>
-        <button class="btn btn-info">4</button>
-      </div>
-        <h1 style="text-align:center">
-          {{pollFromGroup.get('question').value}}
-        </h1>
-        <div class="poll info">
-          <section class="section">
-            <div class="columns is-centered">
-              <div class="column is-one-third">
-                <form [formGroup]="pollFromGroup" (ngSubmit)="onSubmit()">
-                  <div class="container paddinged">
-                    <div formArrayName="options" class="form-group "
-                         *ngFor="let option of options.controls;let i=index">
-                      <div class="form-group">
-                        <label class="label-container form-control">{{option.value}}
-                          <input type="checkbox" formControlName="i">
-                          <span class="checkmark hundred-percent"></span>
-                        </label>
+
+        <div class="shadow paddinged" mat-grid-avatar>
+
+          <div>
+            <section class="section top-margined">
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+
+                  <form [formGroup]="pollFromGroup" disabled="disabled">
+
+
+                    <div id="theme8" class="soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-light  float-left border-dark">رأی</button>
+                          <button class="btn btn-light float-right border-dark">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme1" class="soft-border bg-primary shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-primary border-white  float-left ">رأی</button>
+                          <button class="btn btn-primary border-white float-right ">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme2" class="bg-dark soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-dark border-white  float-left ">رأی</button>
+                          <button class="btn btn-dark border-white float-right ">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme3" class="bg-danger soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-danger  float-left border-white">رأی</button>
+                          <button class="btn btn-danger float-right border-white">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme4" class="bg-light soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-light float-left border-dark ">رأی</button>
+                          <button class="btn btn-light float-right border-dark">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme5" class="bg-info soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-info  float-left border-danger">رأی</button>
+                          <button class="btn btn-info float-right border-danger">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme6" class="bg-secondary soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-secondary  float-left border-white">رأی</button>
+                          <button class="btn btn-secondary float-right border-white">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div id="theme7" class="bg-success soft-border shadow-lg">
+                      <div class="paddinged">
+                        <h1 style="text-align:center">
+                          آیا با این نظرسنجی موافقید ؟
+                        </h1>
+                        <div formArrayName="options">
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            بله
+                          </label>
+                          <br/>
+                          <label>
+                            <input type="radio" class="option-input radio" name="example"/>
+                            خیر
+                          </label>
+                          <br/>
+                          <br/>
+                          <button class="btn btn-success  float-left border-white">رأی</button>
+                          <button class="btn btn-success float-right border-white">نتیجه</button>
+                          <br/>
+                          <br/>
+                        </div>
+                      </div>
+                    </div>
 
-                  <div>
-                    <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-                    <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
-                  </div>
-
-
-                </form>
+                  </form>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
+        <div>
+          <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+          <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+        </div>
+
       </mat-step>
 
       <mat-step>
