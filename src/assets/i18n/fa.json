@@ -31,7 +31,16 @@
       "public": "",
       "password": ""
     },
+    "theme_form": {
+      "fakeQuestion": "آیا با این نظرسنجی موافقید ؟ ",
+      "yes": "بله",
+      "no": "خیر",
+      "vote": "رأی",
+      "result": "نتیجه"
+    },
     "next": "مرحله بعد",
-    "previous": "مرحله قبل"
+    "previous": "مرحله قبل",
+    "reset": "از اول",
+    "submit": "تایید"
   }
 }

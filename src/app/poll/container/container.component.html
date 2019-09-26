@@ -23,15 +23,23 @@
                            type="text"
                            placeholder="{{'poll.register_form.option'|translate}}"
                            [formControlName]="i">
+
+                    <div *ngIf="i>=2">
+                      <button type="button" class="btn btn-danger btn-sm" (click)="removeOption()">-</button>
+                    </div>
                   </div>
                   <br/>
                   <div *ngIf="options.length<=5">
 
                     <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
                   </div>
+                  <br/>
+                  <br/>
                   <div>
-                    <button mat-button matStepperPrevious>مرحله قبل</button>
-                    <button mat-button matStepperNext type="submit">مرحله بعد</button>
+                    <button class="btn btn-success" mat-button
+                            matStepperPrevious>{{'poll.previous' | translate }}</button>
+                    <button class="btn btn-success" mat-button matStepperNext
+                            type="submit">{{'poll.next' | translate }}</button>
                   </div>
                 </form>
               </div>
@@ -40,7 +48,7 @@
         </div>
       </mat-step>
 
-      <mat-step [stepControl]="configFormGroup">
+      <mat-step [stepControl]="pollFromGroup">
         <h1 style="text-align:center">
           {{'poll.register_form.title'|translate}}
         </h1>
@@ -48,7 +56,7 @@
           <section class="section">
             <div class="columns is-centered">
               <div class="column is-one-third">
-                <form [formGroup]="configFormGroup" (ngSubmit)="onSubmit()">
+                <form [formGroup]="pollFromGroup" (ngSubmit)="onSubmit()">
                   <div class="form-group">
                     <label class="label">{{'poll.register_form.type'|translate}}</label>
                     <select class="form-control"
@@ -57,13 +65,14 @@
                       <option value="public">{{'poll.register_form.public'|translate}}</option>
                     </select>
                   </div>
-                  &lt;!&ndash; *ngif() &ndash;&gt;
-                  <label class="label">{{'poll.register_form.password'|translate}} </label>
-                  <div class="form-group ">
-                    <input class="form-control"
-                           type="password"
-                           placeholder="{{'poll.register_form.password'|translate}}"
-                           formControlName="password">
+                  <div *ngIf="pollFromGroup.get('type').value == 'private'">
+                    <label class="label">{{'poll.register_form.password'|translate}} </label>
+                    <div class="form-group ">
+                      <input class="form-control"
+                             type="password"
+                             placeholder="{{'poll.register_form.password'|translate}}"
+                             formControlName="password">
+                    </div>
                   </div>
                   <label class="label">{{'poll.register_form.securityLevel'|translate}} </label>
                   <select class="form-control"
@@ -71,7 +80,9 @@
                     <option value="multipleVote">{{'poll.register_form.multipleVote'|translate}}</option>
                     <option value="light">{{'poll.register_form.light'|translate}}</option>
                     <option value="heavy">{{'poll.register_form.heavy'|translate}}</option>
-                    <option value="blockByIp">{{'poll.register_form.blockByIp'|translate}}</option>
+                    <!--
+                                        <option value="blockByIp">{{'poll.register_form.blockByIp'|translate}}</option>
+                    -->
                   </select>
                   <label class="label">{{'poll.register_form.timeLimited'|translate}} </label>
                   <select class="form-control"
@@ -80,14 +91,16 @@
                     <option value="false">{{'poll.register_form.false'|translate}}</option>
 
                   </select>
-                  &lt;!&ndash; *ngif() &ndash;&gt;
-                  <label class="label">{{'poll.register_form.expireDate'|translate}} </label>
-                  <div class="form-group ">
-                    <input class="form-control"
-                           type="text"
-                           placeholder="{{'poll.register_form.expireDate'|translate}}"
-                           formControlName="expireDate">
+                  <div *ngIf="pollFromGroup.get('timeLimited').value == 'true'">
+                    <label class="label">{{'poll.register_form.expireDate'|translate}} </label>
+                    <div class="form-group ">
+                      <input class="form-control"
+                             type="text"
+                             placeholder="{{'poll.register_form.expireDate'|translate}}"
+                             formControlName="expireDate">
+                    </div>
                   </div>
+                  <br/>
                   <div class="form-group">
                     <label class="label-container">{{'poll.register_form.showResultToOther'|translate}}
                       <input formControlName="showResultToOther" type="checkbox" checked="checked">
@@ -108,10 +121,13 @@
                       <span class="checkmark"></span>
                     </label>
                   </div>
-
+                  <br/>
+                  <br/>
                   <div>
-                    <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-                    <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+                    <button class="btn btn-success" mat-button
+                            matStepperPrevious>{{'poll.previous' | translate }}</button>
+                    <button class="btn btn-success" mat-button matStepperNext
+                            type="submit">{{'poll.next' | translate }}</button>
                   </div>
 
 
@@ -127,229 +143,261 @@
         <div class="shadow paddinged" mat-grid-avatar>
 
           <div>
+
             <section class="section top-margined">
               <div class="columns is-centered">
                 <div class="column is-one-third">
 
                   <form [formGroup]="pollFromGroup" disabled="disabled">
-
-
-                    <div id="theme8" class="soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-light  float-left border-dark">رأی</button>
-                          <button class="btn btn-light float-right border-dark">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme81" class="theme-borders">
+                      <div id="theme8" class="soft-border bg-white shadow-lg" (click)="themeSelect('theme8')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            آیا با این نظرسنجی موافقید ؟
+                          </h1>
+                          <div formArrayName="options">
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              خیر
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-light  float-left border-dark">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-light float-right border-dark">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme1" class="soft-border bg-primary shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-primary border-white  float-left ">رأی</button>
-                          <button class="btn btn-primary border-white float-right ">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme11" class="theme-borders">
+                      <div id="theme1" class="soft-border bg-primary shadow-lg" (click)="themeSelect('theme1')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div formArrayName="options">
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-primary border-white  float-left ">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-primary border-white float-right ">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme2" class="bg-dark soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-dark border-white  float-left ">رأی</button>
-                          <button class="btn btn-dark border-white float-right ">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme21" class="theme-borders">
+                      <div id="theme2" class="bg-dark soft-border shadow-lg" (click)="themeSelect('theme2')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-dark border-white  float-left ">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-dark border-white float-right ">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme3" class="bg-danger soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-danger  float-left border-white">رأی</button>
-                          <button class="btn btn-danger float-right border-white">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme31" class="theme-borders">
+                      <div id="theme3" class="bg-danger soft-border shadow-lg" (click)="themeSelect('theme3')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-danger  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-danger float-right border-white">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme4" class="bg-light soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-light float-left border-dark ">رأی</button>
-                          <button class="btn btn-light float-right border-dark">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme41" class="theme-borders">
+                      <div id="theme4" class="bg-light soft-border shadow-lg" (click)="themeSelect('theme4')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-light float-left border-dark ">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-light float-right border-dark">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme5" class="bg-info soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-info  float-left border-danger">رأی</button>
-                          <button class="btn btn-info float-right border-danger">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme51" class="theme-borders">
+                      <div id="theme5" class="bg-info soft-border shadow-lg" (click)="themeSelect('theme5')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-info  float-left border-danger">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-info float-right border-danger">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme6" class="bg-secondary soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-secondary  float-left border-white">رأی</button>
-                          <button class="btn btn-secondary float-right border-white">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme61" class="theme-borders">
+                      <div id="theme6" class="bg-secondary soft-border shadow-lg" (click)="themeSelect('theme6')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-secondary  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-secondary float-right border-white">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <br/>
                     <hr/>
-                    <div id="theme7" class="bg-success soft-border shadow-lg">
-                      <div class="paddinged">
-                        <h1 style="text-align:center">
-                          آیا با این نظرسنجی موافقید ؟
-                        </h1>
-                        <div formArrayName="options">
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            بله
-                          </label>
-                          <br/>
-                          <label>
-                            <input type="radio" class="option-input radio" name="example"/>
-                            خیر
-                          </label>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-success  float-left border-white">رأی</button>
-                          <button class="btn btn-success float-right border-white">نتیجه</button>
-                          <br/>
-                          <br/>
+                    <div id="theme71" class="theme-borders">
+                      <div id="theme7" class="bg-success soft-border shadow-lg" (click)="themeSelect('theme7')">
+                        <div class="paddinged">
+                          <h1 style="text-align:center">
+                            {{'poll.theme_form.fakeQuestion'|translate}}
+                          </h1>
+                          <div>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.yes'|translate}}
+                            </label>
+                            <br/>
+                            <label>
+                              <input type="radio" class="option-input radio" name="example"/>
+                              {{'poll.theme_form.no'|translate}}
+                            </label>
+                            <br/>
+                            <br/>
+                            <button
+                              class="btn btn-success  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
+                            <button
+                              class="btn btn-success float-right border-white">{{'poll.theme_form.result'|translate}}</button>
+                            <br/>
+                            <br/>
+                          </div>
                         </div>
                       </div>
                     </div>
-
                   </form>
                 </div>
               </div>
             </section>
           </div>
         </div>
+        <br/>
+        <br/>
         <div>
-          <button mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
-          <button mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+          <button class="btn btn-success" mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+          <button class="btn btn-success" mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
         </div>
 
       </mat-step>
@@ -358,8 +406,11 @@
         <ng-template matStepLabel>Done</ng-template>
         You are now done.
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button class="btn btn-success" mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+          <!--          <button mat-button (click)="stepper.reset()">{{'poll.reset' | translate }}</button>-->
+          <form [formGroup]="pollFromGroup">
+            <button class="btn btn-success" (click)="onSubmit()">{{'poll.submit' | translate }}</button>
+          </form>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

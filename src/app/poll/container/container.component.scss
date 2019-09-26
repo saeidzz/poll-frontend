@@ -157,18 +157,53 @@
 .option-input.radio::after {
   border-radius: 50%;
 }
+
 .blue-background {
   background-color: #3777e0;
 }
 
-.soft-border{
+.soft-border {
   border-radius: 7% !important;
 }
-.top-margined{
+
+.top-margined {
   margin-top: 3%;
 }
 
-#theme2{
+#theme2 {
   color: white;
 }
 
+.theme-borders {
+  border-radius: 7% !important;
+  padding: 2%;
+}
+
+//checkbox
+
+.checkbox-lg .custom-control-label::before,
+.checkbox-lg .custom-control-label::after {
+  top: .8rem;
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.checkbox-lg .custom-control-label {
+  padding-top: 13px;
+  padding-left: 6px;
+}
+
+
+.checkbox-xl .custom-control-label::before,
+.checkbox-xl .custom-control-label::after {
+  top: 1.2rem;
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
+.checkbox-xl .custom-control-label {
+  padding-top: 23px;
+  padding-left: 10px;
+}
+
+/// checkbox
