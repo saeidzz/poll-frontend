@@ -20,7 +20,12 @@
       "selectMultiple": "انتخاب گزینه متعدد",
       "showResultToOther": "نمایش نتایج به شرکت کنندگان",
       "securityLevel": "سطح امنیت ",
-      "timeLimited": "محدود زمانی"
+      "timeLimited": "محدود زمانی",
+      "registerLabel": " نظرسنجی",
+      "configLabel": "تنظیمات",
+      "themeLabel": " پوسته",
+      "submitLabel": "تائید نهایی"
+
     },
     "config_form": {
       "title": "نظر ",
@@ -41,6 +46,6 @@
     "next": "مرحله بعد",
     "previous": "مرحله قبل",
     "reset": "از اول",
-    "submit": "تایید"
+    "submit": "تائید ساخت نظرسنجی"
   }
 }
