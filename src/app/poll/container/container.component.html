@@ -1,5 +1,7 @@
 <div class="container center shadow-lg">
-  <div>
+  <div id="image-popup">
+  </div>
+  <div id="main-poll-container">
     <mat-horizontal-stepper labelPosition="bottom" #stepper>
 
       <mat-step [stepControl]="pollFromGroup">
@@ -25,6 +27,11 @@
                            type="text"
                            placeholder="{{'poll.register_form.option'|translate}}"
                            [formControlName]="i">
+                    <div class="form-group">
+                      <label for="file">{{'poll.register_form.select_image'|translate}}</label>
+                      <input type="file"
+                             id="file">
+                    </div>
 
                     <div *ngIf="i>=2">
                       <button type="button" class="btn btn-danger btn-sm" (click)="removeOption()">-</button>
@@ -161,16 +168,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div formArrayName="options">
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-light  float-left border-dark">{{'poll.theme_form.vote'|translate}}</button>
@@ -191,16 +233,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div formArrayName="options">
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-primary border-white  float-left ">{{'poll.theme_form.vote'|translate}}</button>
@@ -221,16 +298,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-dark border-white  float-left ">{{'poll.theme_form.vote'|translate}}</button>
@@ -251,16 +363,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-danger  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
@@ -281,16 +428,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-light float-left border-dark ">{{'poll.theme_form.vote'|translate}}</button>
@@ -311,16 +493,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-info  float-left border-danger">{{'poll.theme_form.vote'|translate}}</button>
@@ -341,16 +558,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-secondary  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
@@ -371,16 +623,51 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.yes'|translate}}
-                            </label>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ronaldo'|translate}}
+                              </label>
+                            </div>
                             <br/>
-                            <label>
-                              <input type="radio" class="option-input radio" name="example"/>
-                              {{'poll.theme_form.no'|translate}}
-                            </label>
                             <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.neymar'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.messi'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <div>
+                              <img 
+                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <label>
+                                <input type="radio" class="option-input radio" name="example"/>
+                                {{'poll.theme_form.ibrahimovic'|translate}}
+                              </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <br/>
                             <button
                               class="btn btn-success  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
@@ -427,7 +714,7 @@
                   <div class="column is-one-third">
 
                     <form [formGroup]="pollFromGroup" disabled="disabled">
-                      <div  class="theme-borders">
+                      <div class="theme-borders">
                         <div class="soft-border bg-white shadow-lg">
                           <div class="paddinged">
                             <h1 style="text-align:center">

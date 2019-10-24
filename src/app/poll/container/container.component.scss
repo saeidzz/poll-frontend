@@ -175,6 +175,7 @@
 }
 
 .theme-borders {
+  z-index: 2;
   border-radius: 7% !important;
   padding: 2%;
 }
@@ -207,3 +208,11 @@
 }
 
 /// checkbox
+.hundred-pixel{
+  width: 100px;
+  height: 100px;
+}
+
+#image-popup{
+  display: none;
+}

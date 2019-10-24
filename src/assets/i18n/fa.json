@@ -1,6 +1,7 @@
 {
   "poll": {
     "register_form": {
+      "select_image": "انتخاب عکس",
       "title": "نظر سنجی",
       "question": "سوال نظر سنجی",
       "options": "گزینه های نظر سنجی",
@@ -37,9 +38,11 @@
       "password": ""
     },
     "theme_form": {
-      "fakeQuestion": "آیا با این نظرسنجی موافقید ؟ ",
-      "yes": "بله",
-      "no": "خیر",
+      "fakeQuestion": "محبوبترین بازیکن فوتبال از نظر شما  ",
+      "ronaldo": "رونالدو",
+      "neymar": "نیمار",
+      "messi": "مسی",
+      "ibrahimovic": "ابراهیموویچ",
       "vote": "رأی",
       "result": "نتیجه"
     },

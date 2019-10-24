@@ -62,8 +62,18 @@ export class ContainerComponent implements OnInit {
     }
     s += '1';
     document.getElementById(s).style.backgroundColor = '#3777e0';
-    this.pollFromGroup.controls.themeName.setValue(s);
+    // console.log(s);
+    this.pollFromGroup.controls.themeName = s;
+    // console.log(this.pollFromGroup.controls);
   }
+
+  showImage(s) {
+  }
+
+  hiddenImage() {
+
+  }
+
 
 }
 
