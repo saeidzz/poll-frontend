@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ChartComponent} from './poll/chart/chart.component';
 
 const routes: Routes = [
-  { path: 'chart', component: ChartComponent }
+  // { path: 'chart', component: ChartComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

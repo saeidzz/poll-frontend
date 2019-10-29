@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {Poll} from '../model/poll';
+import {Config} from '../model/config';
+import {PollService} from '../../poll.service';
 
 
 @Component({
@@ -19,8 +21,9 @@ export class ContainerComponent implements OnInit {
   allCharts = ['polarArea', 'doughnut', 'bar'];
   allImages = [];
   poll: Poll;
+  stringOptions: string[];
 
-  constructor(private translate: TranslateService, private fb: FormBuilder) {
+  constructor(private translate: TranslateService, private fb: FormBuilder, private pollService: PollService) {
     translate.use('fa');
     this.data1 = {
       datasets: [{
@@ -108,10 +111,6 @@ export class ContainerComponent implements OnInit {
     this.options.push(new FormControl(''));
   }
 
-  onSubmit() {
-    console.log('pollFromGroup', this.pollFromGroup.value);
-  }
-
   addOption() {
     this.options.push(new FormControl(''));
     this.options.push(new FormControl(''));
@@ -156,6 +155,56 @@ export class ContainerComponent implements OnInit {
     console.log(this.allImages);
   }
 
+  getBtnClass(themeName) {
+    switch (themeName) {
+      case 'theme1':
+        return 'btn btn-primary border-white';
+      case 'theme2':
+        return 'btn btn-dark border-white';
+      case 'theme3':
+        return 'btn btn-danger border-white';
+      case 'theme4':
+        return 'btn btn-light  border-dark';
+      case 'theme5':
+        return 'btn btn-info  border-danger';
+      case 'theme6':
+        return 'btn btn-secondary  border-white';
+      case 'theme7':
+        return 'btn btn-success  border-white';
+      case 'theme8':
+        return 'btn btn-light border-dark';
+      default:
+        return 'btn btn-light  border-dark';
+    }
+  }
+
+  onSubmit() {
+    const poll = new Poll();
+    const config = new Config();
+    poll.optionImages = this.allImages;
+    poll.question = this.pollFromGroup.controls.question.value;
+    let counter = 0;
+    for (const a of this.options.controls) {
+      if (counter % 2 === 0) {
+        this.stringOptions.push(a.value);
+      }
+      counter++;
+    }
+    poll.options = this.stringOptions;
+    config.chartType = this.pollFromGroup.controls.chartType.value;
+    config.comment = this.pollFromGroup.controls.comment.value;
+    config.password = this.pollFromGroup.controls.password.value;
+    config.pollType = this.pollFromGroup.controls.pollType.value;
+    config.securityLevel = this.pollFromGroup.controls.securityLevel.value;
+    config.selectMultiple = this.pollFromGroup.controls.selectMultiple.value;
+    config.showResultToParicipant = this.pollFromGroup.controls.showResultToParicipant.value;
+    config.themeName = this.pollFromGroup.controls.themeName.value;
+    config.timeLimited = this.pollFromGroup.controls.timeLimited.value;
+    console.log(JSON.stringify(poll));
+    this.pollService.save(poll).subscribe(result => {
+      console.log(result);
+    });
+  }
 }
 
 
