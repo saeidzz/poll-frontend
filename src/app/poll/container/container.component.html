@@ -1,6 +1,4 @@
 <div class="container center shadow-lg">
-  <div id="image-popup">
-  </div>
   <div id="main-poll-container">
     <mat-horizontal-stepper labelPosition="bottom" #stepper>
 
@@ -21,24 +19,32 @@
                               formControlName="question"></textarea>
                   </div>
                   <label class="label">{{'poll.register_form.options'|translate}} </label>
-                  <div formArrayName="options" class="form-group "
+                  <div formArrayName="options" class="form-group"
                        *ngFor="let option of options.controls;let i=index">
-                    <input class="form-control"
-                           type="text"
-                           placeholder="{{'poll.register_form.option'|translate}}"
-                           [formControlName]="i">
-                    <div class="form-group">
-                      <label for="file">{{'poll.register_form.select_image'|translate}}</label>
-                      <input type="file"
-                             id="file">
+                    <div *ngIf="i%2===0">
+                      <input class="form-control"
+                             type="text"
+                             placeholder="{{'poll.register_form.option'|translate}}"
+                             [formControlName]="i">
+                    </div>
+                    <div class="form-group" *ngIf="i%2===1">
+                      <label>{{'poll.register_form.select_image'|translate}}</label>
+                      <span style="color:red;" *ngIf="message">{{message}}</span>
+                      <input type="file" accept='image/*' (change)="preview($event,i)" id="file{{i}}"
+                             [formControlName]="i"/>
+                      <div class="image-preview" *ngIf="allImages[i/2]">
+                        <img [src]="allImages[i/2]" height="100" width="100"/>
+                      </div>
+
+                      <div *ngIf="i>=5">
+                        <button type="button" class="btn btn-danger btn-sm" (click)="removeOption()">-</button>
+                      </div>
                     </div>
 
-                    <div *ngIf="i>=2">
-                      <button type="button" class="btn btn-danger btn-sm" (click)="removeOption()">-</button>
-                    </div>
+
                   </div>
                   <br/>
-                  <div *ngIf="options.length<=5">
+                  <div *ngIf="options.length<11">
 
                     <button type="button" class="btn btn-info btn-sm" (click)="addOption()">+</button>
                   </div>
@@ -168,10 +174,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div formArrayName="options">
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -179,10 +185,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -190,10 +196,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -201,10 +207,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -212,7 +218,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-light  float-left border-dark">{{'poll.theme_form.vote'|translate}}</button>
@@ -225,7 +231,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme11" class="theme-borders">
                       <div id="theme1" class="soft-border bg-primary shadow-lg" (click)="themeSelect('theme1')">
                         <div class="paddinged">
@@ -233,10 +239,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div formArrayName="options">
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -244,10 +250,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -255,10 +261,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -266,10 +272,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -277,7 +283,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-primary border-white  float-left ">{{'poll.theme_form.vote'|translate}}</button>
@@ -290,7 +296,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme21" class="theme-borders">
                       <div id="theme2" class="bg-dark soft-border shadow-lg" (click)="themeSelect('theme2')">
                         <div class="paddinged">
@@ -298,10 +304,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -309,10 +315,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -320,10 +326,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -331,10 +337,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -342,7 +348,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-dark border-white  float-left ">{{'poll.theme_form.vote'|translate}}</button>
@@ -355,7 +361,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme31" class="theme-borders">
                       <div id="theme3" class="bg-danger soft-border shadow-lg" (click)="themeSelect('theme3')">
                         <div class="paddinged">
@@ -363,10 +369,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -374,10 +380,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -385,10 +391,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -396,10 +402,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -407,7 +413,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-danger  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
@@ -420,7 +426,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme41" class="theme-borders">
                       <div id="theme4" class="bg-light soft-border shadow-lg" (click)="themeSelect('theme4')">
                         <div class="paddinged">
@@ -428,10 +434,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -439,10 +445,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -450,10 +456,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -461,10 +467,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -472,7 +478,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-light float-left border-dark ">{{'poll.theme_form.vote'|translate}}</button>
@@ -485,7 +491,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme51" class="theme-borders">
                       <div id="theme5" class="bg-info soft-border shadow-lg" (click)="themeSelect('theme5')">
                         <div class="paddinged">
@@ -493,10 +499,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -504,10 +510,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -515,10 +521,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -526,10 +532,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -537,7 +543,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-info  float-left border-danger">{{'poll.theme_form.vote'|translate}}</button>
@@ -550,7 +556,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme61" class="theme-borders">
                       <div id="theme6" class="bg-secondary soft-border shadow-lg" (click)="themeSelect('theme6')">
                         <div class="paddinged">
@@ -558,10 +564,10 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -569,10 +575,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -580,10 +586,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -591,10 +597,10 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -602,7 +608,7 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
+                            
                             <br/>
                             <button
                               class="btn btn-secondary  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
@@ -615,7 +621,7 @@
                       </div>
                     </div>
                     <br/>
-                    <hr/>
+                    
                     <div id="theme71" class="theme-borders">
                       <div id="theme7" class="bg-success soft-border shadow-lg" (click)="themeSelect('theme7')">
                         <div class="paddinged">
@@ -623,10 +629,9 @@
                             {{'poll.theme_form.fakeQuestion'|translate}}
                           </h1>
                           <div>
-                            <hr/>
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ronaldo.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ronaldo'|translate}}
@@ -634,10 +639,9 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
                             <div>
-                              <img 
-                                   src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/neymar.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.neymar'|translate}}
@@ -645,10 +649,9 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
                             <div>
-                              <img 
-                                   src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/messi.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.messi'|translate}}
@@ -656,10 +659,9 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
                             <div>
-                              <img 
-                                   src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
+                              <img
+                                src="../../../assets/logos/ibrahimovic.jpg" class="hundred-pixel float-left">
                               <label>
                                 <input type="radio" class="option-input radio" name="example"/>
                                 {{'poll.theme_form.ibrahimovic'|translate}}
@@ -667,7 +669,6 @@
                             </div>
                             <br/>
                             <br/>
-                            <hr/>
                             <br/>
                             <button
                               class="btn btn-success  float-left border-white">{{'poll.theme_form.vote'|translate}}</button>
@@ -679,6 +680,56 @@
                         </div>
                       </div>
                     </div>
+                  </form>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <div>
+          <button class="btn btn-success" mat-button matStepperPrevious>{{'poll.previous' | translate }}</button>
+          <button class="btn btn-success" mat-button matStepperNext type="submit">{{'poll.next' | translate }}</button>
+        </div>
+
+      </mat-step>
+
+      <mat-step [stepControl]="pollFromGroup">
+        <ng-template matStepLabel>{{'poll.register_form.chartLabel'|translate}}</ng-template>
+
+        <div class="shadow paddinged">
+
+          <div>
+
+            <section class="section top-margined">
+              <div class="columns is-centered">
+                <div>
+                  <form [formGroup]="pollFromGroup" disabled="disabled">
+                    <div id="polarArea" class="chart-borders">
+                      <div class="soft-border bg-white shadow-lg paddinged chart-size"
+                           (click)="chartSelect('polarArea')">
+                        <p-chart width="100%" height="100%" type="polarArea" [data]="data1"></p-chart>
+                      </div>
+                    </div>
+                    <br/>
+                    
+                    <div id="doughnut" class="chart-borders">
+                      <div class="soft-border bg-white shadow-lg paddinged chart-size"
+                           (click)="chartSelect('doughnut')">
+                        <p-chart width="100%" height="100%" type="doughnut" [data]="data2"></p-chart>
+                      </div>
+                    </div>
+                    <br/>
+                    
+                    <div id="bar" class="chart-borders">
+                      <div class="soft-border bg-white shadow-lg paddinged chart-size" (click)="chartSelect('bar')">
+                        <p-chart width="100%" height="80%" type="bar" [data]="data3"></p-chart>
+                      </div>
+                    </div>
+                    <br/>
+                    
+
                   </form>
                 </div>
               </div>
@@ -708,28 +759,30 @@
           <div mat-grid-avatar>
 
             <div>
-
               <section class="section top-margined">
                 <div class="columns is-centered">
                   <div class="column is-one-third">
 
                     <form [formGroup]="pollFromGroup" disabled="disabled">
-                      <div class="theme-borders">
-                        <div class="soft-border bg-white shadow-lg">
+                        <div [class]="pollFromGroup.controls.themeName">
                           <div class="paddinged">
                             <h1 style="text-align:center">
                               {{pollFromGroup.get("question").value}}
                             </h1>
-                            <hr/>
                             <div formArrayName="options" class="form-group "
                                  *ngFor="let option of options.controls;let i=index">
-                              <label>
-                                <input type="radio" class="option-input radio" name="example"/>
-                                {{option.value}}
-                              </label>
+                              <div *ngIf="i%2===0">
+                               <div>
+                                 <img
+                                   [src]="allImages[(i+1)/2]" class="hundred-pixel float-left">
+                               </div>
+                                <label>
+                                  <input type="radio" class="option-input radio" name="example"/>
+                                  {{option.value}}
+                                </label>
+                              </div>
+                              <br/>
                             </div>
-                            <br/>
-                            <br/>
                             <button
                               class="btn btn-light  float-left border-dark">{{'poll.theme_form.vote'|translate}}</button>
                             <button
@@ -738,7 +791,6 @@
                             <br/>
                           </div>
                         </div>
-                      </div>
                     </form>
                   </div>
                 </div>

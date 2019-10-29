@@ -1,4 +1,13 @@
 export class Config {
-  id: number;
-
+  id;
+  pollType;
+  securityLevel;
+  timeLimited;
+  showResultToParicipant;
+  comment;
+  selectMultiple;
+  themeName;
+  chartType;
+  password;
 }
+

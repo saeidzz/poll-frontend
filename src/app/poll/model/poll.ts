@@ -1,13 +1,11 @@
-import {Config} from "./config";
-import {Option} from "./option";
-import {User} from "./user";
+import {Config} from './config';
+import {User} from './user';
 
 export class Poll {
   id: number;
   owner: User;
   question: string;
-  options: Option[];
+  options: string[];
+  optionImages: string[];
   config: Config;
-
-
 }

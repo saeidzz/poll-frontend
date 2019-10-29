@@ -25,7 +25,8 @@
       "registerLabel": " نظرسنجی",
       "configLabel": "تنظیمات",
       "themeLabel": " پوسته",
-      "submitLabel": "تائید نهایی"
+      "submitLabel": "تائید نهایی",
+      "chartLabel": "نمودار"
 
     },
     "config_form": {

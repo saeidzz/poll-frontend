@@ -1,0 +1,4 @@
+enum PollType {
+  public,
+  private
+}
