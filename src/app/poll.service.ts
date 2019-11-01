@@ -19,6 +19,11 @@ export class PollService {
   save(poll: Poll) {
     const body = JSON.stringify(poll);
     localStorage.setItem('', '');
-    return this.http.post('/server/addNewUser', body, httpOptions);
+    return this.http.post('/server/api/poll/save', body, httpOptions);
+  }
+
+  get() {
+    localStorage.setItem('', '');
+    return this.http.get('/server/api/poll', httpOptions);
   }
 }

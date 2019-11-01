@@ -753,14 +753,14 @@
 
           <br/>
           <br/>
-          <div mat-grid-avatar>
+          <div>
 
             <div>
               <section class="section top-margined">
                 <div class="columns is-centered">
                   <div class="column is-one-third">
 
-                    <form [formGroup]="pollFromGroup" disabled="disabled">
+                    <form [formGroup]="pollFromGroup">
                       <div [class]="pollFromGroup.controls.themeName">
                         <div class="paddinged">
                           <h1 style="text-align:center">
@@ -788,7 +788,7 @@
                           <br/>
                         </div>
                       </div>
-                      <button class="btn btn-success" (click)="onSubmit()">{{'poll.submit' | translate }}</button>
+                      <button class="btn btn-success" mat-button mat-t (click)="onSubmit()">{{'poll.submit' | translate }}</button>
                     </form>
                   </div>
                 </div>

@@ -109,7 +109,9 @@ export class ContainerComponent implements OnInit {
     this.options.push(new FormControl(''));
     this.options.push(new FormControl(''));
     this.options.push(new FormControl(''));
-  }
+    this.pollService.get().subscribe(result => {
+      console.log(result);
+    });  }
 
   addOption() {
     this.options.push(new FormControl(''));
