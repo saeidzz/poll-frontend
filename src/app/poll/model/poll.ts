@@ -6,6 +6,5 @@ export class Poll {
   owner: User;
   question: string;
   options: string[];
-  optionImages: string[];
   config: Config;
 }

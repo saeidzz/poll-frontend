@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {Poll} from '../model/poll';
-import {Config} from '../model/config';
 import {PollService} from '../../poll.service';
+import {Config} from '../model/config';
 
 
 @Component({
@@ -15,12 +15,13 @@ export class ContainerComponent implements OnInit {
   data1: any;
   data2: any;
   data3: any;
+  allImages = [];
   public message: string;
   pollFromGroup: FormGroup;
   allBorders = ['theme11', 'theme21', 'theme31', 'theme41', 'theme51', 'theme61', 'theme71', 'theme81'];
   allCharts = ['polarArea', 'doughnut', 'bar'];
-  allImages = [];
   poll: Poll;
+  config: Config;
   stringOptions: string[];
 
   constructor(private translate: TranslateService, private fb: FormBuilder, private pollService: PollService) {
@@ -91,6 +92,8 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.poll = new Poll();
+    this.config = new Config();
     this.pollFromGroup = this.fb.group({
       type: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -111,7 +114,8 @@ export class ContainerComponent implements OnInit {
     this.options.push(new FormControl(''));
     this.pollService.get().subscribe(result => {
       console.log(result);
-    });  }
+    });
+  }
 
   addOption() {
     this.options.push(new FormControl(''));
@@ -142,6 +146,7 @@ export class ContainerComponent implements OnInit {
     // console.log(s);
     this.pollFromGroup.controls.chartType = s;
     // console.log(this.pollFromGroup.controls);
+    this.fillPoll();
   }
 
 
@@ -180,30 +185,32 @@ export class ContainerComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    const poll = new Poll();
-    const config = new Config();
-    poll.optionImages = this.allImages;
-    poll.question = this.pollFromGroup.controls.question.value;
+  fillPoll() {
     let counter = 0;
-    for (const a of this.options.controls) {
-      if (counter % 2 === 0) {
-        this.stringOptions.push(a.value);
+    this.poll.options = this.pollFromGroup.value.options;
+
+    this.poll.options.forEach((image: any) => {
+      if (counter % 2 !== 0) {
+        this.poll.options[counter] = this.allImages[counter / 2];
       }
       counter++;
-    }
-    poll.options = this.stringOptions;
-    config.chartType = this.pollFromGroup.controls.chartType.value;
-    config.comment = this.pollFromGroup.controls.comment.value;
-    config.password = this.pollFromGroup.controls.password.value;
-    config.pollType = this.pollFromGroup.controls.pollType.value;
-    config.securityLevel = this.pollFromGroup.controls.securityLevel.value;
-    config.selectMultiple = this.pollFromGroup.controls.selectMultiple.value;
-    config.showResultToParicipant = this.pollFromGroup.controls.showResultToParicipant.value;
-    config.themeName = this.pollFromGroup.controls.themeName.value;
-    config.timeLimited = this.pollFromGroup.controls.timeLimited.value;
-    console.log(JSON.stringify(poll));
-    this.pollService.save(poll).subscribe(result => {
+    });
+    this.poll.question = this.pollFromGroup.controls.question.value;
+    this.config.chartType = this.pollFromGroup.controls.chartType;
+    this.config.comment = this.pollFromGroup.controls.otherOption.value;
+    this.config.password = this.pollFromGroup.controls.password.value;
+    this.config.pollType = this.pollFromGroup.controls.type.value;
+    this.config.securityLevel = this.pollFromGroup.controls.securityLevel.value;
+    this.config.selectMultiple = this.pollFromGroup.controls.selectMultiple.value;
+    this.config.showResultToParicipant = this.pollFromGroup.controls.showResultToOther.value;
+    this.config.themeName = this.pollFromGroup.controls.themeName;
+    this.config.timeLimited = this.pollFromGroup.controls.timeLimited.value;
+    this.poll.config = this.config;
+    console.log(this.poll);
+  }
+
+  submitPoll() {
+    this.pollService.save(this.poll).subscribe(result => {
       console.log(result);
     });
   }
